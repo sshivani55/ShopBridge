@@ -1,0 +1,22 @@
+<div class="modal-header">
+	<h4 class="modal-title">Search for a product</h4>
+	<!-- <button type="button" class="close" aria-label="Close" class="btn btn-primary" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button> -->
+</div>
+<div class="modal-body">
+	<div class="card lesson-border">
+		<!-- <img class="card-img-top" src="{{lesson.image_path}}" alt="Card image cap"> -->
+        <input type="text" class="formControl" [(ngModel)]="searchText" placeholder="Enter product name..."
+        id="search-text" aria-describedby="search-text">
+    
+        <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let item of itemList | searchFilter: searchText" (click)="itemClicked(item.pid)">
+            {{item.product_name}}
+        </li>
+    </ul>
+    </div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-primary" (click)="activeModal.close('Close click')">Close</button>
+</div>

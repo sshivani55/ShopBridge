@@ -1,0 +1,27 @@
+<ul class="horizontal">
+    <li>
+        <a class="active" [routerLink]="['/item-list']">
+        <img class="logo" src="../../assets/images/logo.png" alt="" width="30" height="30">
+    </a>
+</li>
+<li>
+    <a style="margin-top: 5px; font-weight: 425; font-size: 20px;">
+    {{pageTitle}}
+</a>
+</li>
+<li class="rightli" style="float:right">
+    <a  [routerLink]="['/modify-item']" [queryParams]="{mode:'new'}">
+        <mat-icon>library_add</mat-icon>
+        <span>Add New Item</span>
+    </a>
+</li>
+    <li class="rightli" style="float:right">
+        <a (click)="openSearchModal($event)" style="padding-top: 18px;">
+            <span> Search Item</span>
+        </a>
+    </li>
+</ul>
+
+<!-- <span class="page-title">
+    {{pageTitle}}
+</span> -->

@@ -1,0 +1,17 @@
+button{
+    background-color: #dd003f;
+  }
+
+  button:hover{
+    background-color: #311754;
+  }
+
+.modal-title{
+    color: white;
+    padding-top: 10px;
+}
+
+.modal-header {
+    background-color: #311754;
+    height: 40px;
+}

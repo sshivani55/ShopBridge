@@ -1,0 +1,97 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h3></h3>
+                <form name="form" (ngSubmit)="itemForm.form.valid && autoCheck()" #itemForm="ngForm" novalidate *ngIf="!isLoading">
+                    <div *ngIf="errorFlag">
+                        <span class="error">
+                            {{statusMessage}}
+                        </span>
+                    </div>
+                    
+                    <br>
+                    <br>
+                    <div class="product-section">
+                    <div class="form-group" [ngClass]="{'has-error': !isBrandNameValid}">
+                        <label class="product-title">Brand</label>
+                        <input type="text" class="form-control" name="brand" placeholder="Enter Brand Name" [(ngModel)]="item.brand" #brand="ngModel" [minLength]="1" [maxLength]="200" [ngClass]="{ 'is-invalid': itemForm.submitted && brand.invalid }" required />
+                        <div *ngIf="itemForm.submitted && brand.invalid" class="invalid-feedback" >
+                            <!-- <div *ngIf="brand.errors.required">Brand Name is required</div> -->
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="product-section">
+                    <div class="form-group" [ngClass]="{'has-error': !isProductNameValid}">
+                        <label class="product-title">Product Name</label>
+                        <input type="text" class="form-control" name="product_name" placeholder="Enter Product Name" [minLength]="1" [maxLength]="200" [(ngModel)]="item.product_name" #product_name="ngModel" [ngClass]="{ 'is-invalid': itemForm.submitted && product_name.invalid }" required />
+                        <div *ngIf="itemForm.submitted && product_name.invalid" class="invalid-feedback">
+                            <!-- <div *ngIf="brand.errors.required">Brand Name is required</div> -->
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="product-section">
+                    <div class="form-group" [ngClass]="{'has-error': !isProductIdValid}">
+                        <label class="product-title">Product ID</label>
+                        <span class="mandatory-field">*should be unique</span>
+                        <input type="text" class="form-control" name="pid" placeholder="Enter Product ID" [maxLength]="20" [minLength]="15" [(ngModel)]="item.pid" #pid="ngModel" [ngClass]="{ 'is-invalid': itemForm.submitted && pid.invalid }" required [disabled]="editMode" />
+                        <div *ngIf="itemForm.submitted && pid.invalid" class="invalid-feedback" >
+                            <!-- <div *ngIf="brand.errors.required">Brand Name is required</div> -->
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="product-section">
+                    <div class="form-group">
+                        <label class="product-title">Description</label>
+                        <textarea type="text" class="form-control" name="description" placeholder="Enter Description" [minLength]="1" [maxLength]="500"  [(ngModel)]="item.description" #description="ngModel" [ngClass]="{ 'is-invalid': itemForm.submitted && description.invalid }" required>
+                        </textarea>
+                        <div *ngIf="itemForm.submitted && description.invalid" class="invalid-feedback">
+                            <!-- <div *ngIf="brand.errors.required">Brand Name is required</div> -->
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="product-section">
+                        <div class="form-group" [ngClass]="{'has-error': !isRetailValid}">
+                            <label class="product-title">Retail Price</label>
+                            <input type="number" name="retail_price" [(ngModel)]="item.retail_price" class="form-control" appTwoDigitPositiveNumber required/>
+                        </div>
+                    </div>
+
+                    <div class="product-section">
+                        <div class="form-group" [ngClass]="{'has-error': !isDiscountValid}">
+                            <label class="product-title">Discounted Price</label>
+                            <span class="mandatory-field">*should be less than the Retail Price</span>
+                            <input type="number" name="discounted_price" [(ngModel)]="item.discounted_price" class="form-control" appTwoDigitPositiveNumber required/>
+                        </div>
+                    </div>
+
+                    <div class="product-section">
+                        <div class="form-group">
+                            <label class="product-title">In Stock</label>
+                            <input type="number" name="in_stock" [(ngModel)]="item.in_stock" class="form-control" appTwoDigitPositiveNumber required/>
+                        </div>
+                    </div>
+
+                    <div class="product-section">
+                        <div class="form-group">
+                            <label class="product-title">Forecasted Demand</label>
+                            <input type="number" name="requested" [(ngModel)]="item.requested" class="form-control" appTwoDigitPositiveNumber required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">Save Data</button>
+                    </div> 
+                </form>
+
+                <div *ngIf="isLoading">
+                    <app-loading-spinner></app-loading-spinner>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

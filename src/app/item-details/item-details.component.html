@@ -1,0 +1,110 @@
+<div *ngIf="!isLoading && item !== undefined">
+    <div *ngIf="successFlag">
+        <span class="success">
+            {{statusMessage}}
+        </span>
+    </div>
+
+    <div *ngIf="errorFlag">
+        <span class="error">
+            {{statusMessage}}
+        </span>
+    </div>
+<div class="user-action">
+<button [routerLink]="['/modify-item']" [queryParams]="{mode: 'edit'}" class="btn btn-primary" style="margin-right: 20px" title="Modify Details">
+    <mat-icon>edit</mat-icon>
+    <span>Edit</span>
+</button>
+
+<button (click)="deleteItem()" class="btn btn-primary" style="margin-right: 20px" title="Delete Item from Database">
+    <mat-icon>delete</mat-icon>
+    <span>Delete</span>
+</button>
+</div>
+<br>
+<br>
+
+<div class="product-section">
+<h4 class="product-title">Product Name</h4>
+<h1 class="product-details">{{item.product_name}}</h1>
+</div>
+
+<div class="product-section">
+    <h4 class="product-title">Brand</h4>
+    <h1 class="product-details">{{item.brand}}</h1>
+    </div>
+
+<div class="product-section">
+<h4 class="product-title">Rating</h4>
+
+<div class="product-details">
+        <mat-icon style="color: #F7E007;">star</mat-icon>
+        {{item.product_rating}}
+</div>
+</div>
+
+<!-- <div class="product-section">
+<h4 class="product-title">Retail Price</h4>
+<h1 class="product-details">{{item.retail_price}}</h1>
+</div> -->
+
+<div class="index-tableContainer">
+    <div class="index-row">
+<div class="index-rowKey">Retail Price</div>
+<div class="index-rowValue">{{item.retail_price}}</div>
+</div>
+
+<div class="index-row">
+    <div class="index-rowKey">Discounted Price</div>
+    <div class="index-rowValue">{{item.discounted_price}}</div>
+</div>
+
+<div class="index-row">
+<div class="index-rowKey">In-stock</div>
+<div class="index-rowValue">{{item.in_stock}}</div>
+</div>
+
+<div class="index-row">
+    <div class="index-rowKey">Forecasted Demand</div>
+    <div class="index-rowValue">{{item.requested}}</div>
+</div>
+</div>
+
+<div class="product-section">
+    <h4 class="product-title">Product Details</h4>
+    <h1 class="product-details">{{item.description}}</h1>
+</div>
+
+<!-- <div class="product-section">
+    <h4 class="product-title">In-stock</h4>
+    <h1 class="product-details">{{item.in_stock}}</h1>
+</div>
+
+<div class="product-section">
+    <h4 class="product-title">Requested</h4>
+    <h1 class="product-details">{{item.requested}}</h1>
+</div> -->
+
+<div *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div *ngIf="!isLoading && item == undefined">
+    <span class="error">
+        {{statusMessage}}
+    </span>
+</div>
+<!-- <div class="product-section">
+    <h4 class="product-title" style="padding-bottom: 10px;">Specifications</h4>
+    <div class="table-container" *ngFor="let spec of item.product_specification">
+    <div class="index-row">
+        <div class="index-rowKey">
+            {{spec.key}}
+        </div>
+        <div class="index-rowValue">
+            {{spec.value}}
+        </div>
+    </div>
+    </div>
+</div> -->
+

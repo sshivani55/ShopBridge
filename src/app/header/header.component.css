@@ -1,0 +1,42 @@
+ul.horizontal {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #311754;
+}
+
+ul.horizontal li {
+    float: left;
+}
+
+ul.horizontal li a.active {
+    background-color: #dd003f;
+}
+
+ul.horizontal li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+  button{
+    background-color: #dd003f;
+  }
+
+  button:hover{
+    background-color: #311754;
+  }
+
+.page-title{
+  padding: 14px 16px;
+  background-color: #311754;
+  color: white;
+  width: 1560px;
+  display: inline-block;
+  text-align: left;
+  
+
+}

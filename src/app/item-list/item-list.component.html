@@ -1,0 +1,134 @@
+<div *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div *ngIf="!isLoading && itemList.length !== 0" style="overflow-x:auto;">
+<table>
+    <tr>
+        <!-- <th>
+            <mat-checkbox class="example-margin"
+                  [checked]="allItems"
+                  (change)="setAll($event.checked)">
+            </mat-checkbox>
+        </th> -->
+        <th style="padding-left: 30px;">
+            Product ID
+            <div *ngIf="!sortByProduct_id">
+                <a><img class="logo" src="../../assets/images/asc.png" alt="" width="10px" height="10px" (click)="sortProcductsBy('product_id', 'asc')"></a>
+            </div>
+
+            <div *ngIf="sortByProduct_id">
+                <a><img class="logo" src="../../assets/images/desc.png" alt="" width="10px" height="10px" (click)="sortProcductsBy('product_id', 'desc')"></a>
+            </div>
+        </th>
+        <th>
+            Product Name
+            <div *ngIf="!sortByProduct_name">
+                <a><img class="logo" src="../../assets/images/asc.png" alt="" width="10px" height="10px" (click)="sortProcductsBy('product_name', 'asc')"></a>
+            </div>
+
+            <div *ngIf="sortByProduct_name">
+                <a><img class="logo" src="../../assets/images/desc.png" alt="" width="10px" height="10px" (click)="sortProcductsBy('product_name', 'desc')"></a>
+            </div>
+        </th>
+        <th>
+            Retail Price
+            <div *ngIf="!sortByRetail_price">
+                <a><img class="logo" src="../../assets/images/asc.png" alt="" width="10px" height="10px" (click)="sortProcductsBy('retail_price', 'asc')"></a>
+            </div>
+
+            <div *ngIf="sortByRetail_price">
+                <a><img class="logo" src="../../assets/images/desc.png" alt="" width="10px" height="10px" (click)="sortProcductsBy('retail_price', 'desc')"></a>
+            </div>
+        </th>
+        <th>
+            Discounted Price
+            <div *ngIf="!sortByDiscounted_price">
+                <a><img class="logo" src="../../assets/images/asc.png" alt="" width="10px" height="10px" (click)="sortProcductsBy('discounted_price', 'asc')"></a>
+            </div>
+
+            <div *ngIf="sortByDiscounted_price">
+                <a><img class="logo" src="../../assets/images/desc.png" alt="" width="10px" height="10px" (click)="sortProcductsBy('discounted_price', 'desc')"></a>
+            </div>
+        </th>
+        <th>
+            Items In Stock
+            <div *ngIf="!sortByIn_stock">
+                <a><img class="logo" src="../../assets/images/asc.png" alt="" width="10px" height="10px" (click)="sortProcductsBy('in_stock', 'asc')"></a>
+            </div>
+
+            <div *ngIf="sortByIn_stock">
+                <a><img class="logo" src="../../assets/images/desc.png" alt="" width="10px" height="10px" (click)="sortProcductsBy('in_stock', 'desc')"></a>
+            </div>
+        </th>
+        <th>
+            Items Requested
+            <div *ngIf="!sortByRequested">
+                <a><img class="logo" src="../../assets/images/asc.png" alt="" width="10px" height="10px" (click)="sortProcductsBy('requested', 'asc')"></a>
+            </div>
+
+            <div *ngIf="sortByRequested">
+                <a><img class="logo" src="../../assets/images/desc.png" alt="" width="10px" height="10px" (click)="sortProcductsBy('requested', 'desc')"></a>
+            </div>
+        </th>
+        <th>
+            <!-- <button mat-menu-item (click)="deleteAll()" [disabled]="!multipleItemFlag">
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button> -->
+        </th>
+    </tr>
+
+    <tr *ngFor="let item of itemList | paginate: { itemsPerPage: 15, currentPage: pageNo} ">
+        <!-- <td>
+            <mat-checkbox [(ngModel)]="item.selected"
+                      (ngModelChange)="updateAllComplete()">
+        </mat-checkbox>
+        </td> -->
+        <td style="padding-left: 30px;">
+            {{item.pid}}
+        </td>
+        <td>
+            {{item.product_name}}
+        </td>
+        <td>
+            {{item.retail_price}}
+        </td>
+        <td>
+            {{item.discounted_price}}
+        </td>
+        <td>
+            {{item.in_stock}}
+        </td>
+        <td>
+            {{item.requested}}
+        </td>
+        <td style="padding-right: 40px;">
+                <mat-icon mat-icon-button [matMenuTriggerFor]="menu1">more_vert</mat-icon>
+              <mat-menu (closed)="menuOneClosed()" #menu1="matMenu">
+                <button mat-menu-item [routerLink]="['/item-details']" [queryParams]="{itemID: item.pid}">
+                    <mat-icon>visibility</mat-icon>
+                    <span>View Details</span>
+                  </button>
+                <button mat-menu-item (click)="editItem(item.pid)">
+                  <mat-icon>edit</mat-icon>
+                  <span>Edit</span>
+                </button>
+                <button mat-menu-item (click)="deleteItem(item.pid)">
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete</span>
+                </button>
+              </mat-menu>
+        </td>
+    </tr>
+</table>
+<span class="page-controls">
+<pagination-controls (pageChange)="pageNo = $event"></pagination-controls>
+</span>
+</div>
+
+<div *ngIf="!isLoading && itemList.length == 0">
+    <span class="error">
+        {{statusMessage}}
+    </span>
+</div>
